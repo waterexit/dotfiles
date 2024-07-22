@@ -10,4 +10,5 @@ return {
 	}),
 	font_size = 13.0,
   allow_square_glyphs_to_overflow_width = "Never",
+  window_background_opacity = 0.85,
 }
