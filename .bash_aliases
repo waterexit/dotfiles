@@ -9,3 +9,6 @@ alias gp="git push"
 alias gpf="git push -f"
 
 alias v="nvim"
+
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
