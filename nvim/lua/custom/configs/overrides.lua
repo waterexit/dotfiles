@@ -42,7 +42,8 @@ M.mason = {
     -- python
     "pyright",
 
-    "ruby_lsp",
+    -- ruby
+    "ruby-lsp",
   },
 }
 
