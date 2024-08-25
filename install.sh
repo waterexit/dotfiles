@@ -11,7 +11,7 @@ function install {
 		echo $2
 	fi | bash
 }
-
+sudo apt update
 install nvim <<EOS
 	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz &&
 	sudo rm -rf /opt/nvim && 
@@ -19,3 +19,4 @@ install nvim <<EOS
 	# sudo rm nvim-linux64.tar.gz
 EOS
 install starship 'curl -sS https://starship.rs/install.sh | sh'
+install fzf 'sudo apt install fzf'
