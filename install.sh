@@ -18,3 +18,4 @@ install nvim <<EOS
 	sudo tar -C /opt -xzf nvim-linux64.tar.gz
 	# sudo rm nvim-linux64.tar.gz
 EOS
+install starship 'curl -sS https://starship.rs/install.sh | sh'
