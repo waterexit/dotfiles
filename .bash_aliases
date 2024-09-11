@@ -31,4 +31,13 @@ function drm() {
   cid=$(docker ps -a | sed 1d | fzf | awk '{print $1}')
 
   docker rm ${force} "$cid"
- } 
+ }
+
+# connectoin ssh via tailscale
+function sshc() {
+  local user=$1
+  local server_name
+  server_name=$(tailscale status| sed '/^#/d' | fzf | awk '{print $2}')
+  
+  ssh $user@$server_name
+}
