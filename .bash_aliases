@@ -35,9 +35,27 @@ function drm() {
 
 # connectoin ssh via tailscale
 function sshc() {
+  local OPTIND
+  local remote_port
+  local global
+  local option
+  while getopts gL: option
+  do
+    case $option in 
+      L) 
+        echo "L"
+        remote_port="-L ${OPTARG}"
+        ;;
+      g)
+        echo "g"
+        global="-g"
+        ;;
+    esac
+  done
+  shift `expr "${OPTIND}" - 1`
   local user=$1
   local server_name
   server_name=$(tailscale status| sed '/^#/d' | fzf | awk '{print $2}')
   
-  ssh $user@$server_name
+  ssh $remote_port $global $user@$server_name
 }
