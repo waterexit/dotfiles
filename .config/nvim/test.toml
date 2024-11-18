@@ -1,0 +1,2 @@
+[[plugins]]
+repo = 'nvim-tree/nvim-tree.lua'

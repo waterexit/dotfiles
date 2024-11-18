@@ -1,21 +1,55 @@
-require "core"
 
-local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
+vim.cmd("filetype indent plugin on")
+-- vim.cmd("syntax on")
 
-if custom_init_path then
-  dofile(custom_init_path)
+local runtime_root = vim.fn.stdpath("config") .. "/runtime/"
+  local runtime_plugins = {"vim-denops/denops.vim", "Shougo/dpp.vim", "Shougo/dpp-ext-installer", "Shougo/dpp-protocol-git", "Shougo/dpp-ext-toml", "Shougo/dpp-ext-lazy", "Shougo/dpp-ext-local.git"}
+  for _, plugin in ipairs(runtime_plugins) do
+    if not (vim.uv or vim.loop).fs_stat(runtime_root .. plugin) then
+	    vim.fn.system({
+	      "git",
+	      "clone",
+	      "https://github.com/" .. plugin..".git",
+	      runtime_root .. plugin
+	    })
+   end
+  vim.opt.rtp:prepend(runtime_root .. plugin)
 end
 
-require("core.utils").load_mappings()
+local dpp_base = vim.fn.stdpath("config") .. "/runtime/plugin_sources"
+local dpp_config = vim.fn.stdpath("config") .. "/dpp_config.ts"
 
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+vim.opt.runtimepath:append(runtime_root .. "Shougo/dpp.vim")
+local dpp = require("dpp")
 
--- bootstrap lazy.nvim!
-if not vim.loop.fs_stat(lazypath) then
-  require("core.bootstrap").gen_chadrc_template()
-  require("core.bootstrap").lazy(lazypath)
+local denops_src = runtime_root .. "vim-denops/denops.vim"
+if dpp.load_state(dpp_base) then
+  vim.opt.rtp:prepend(denops_src)
+  vim.api.nvim_create_autocmd("User", {
+ 	pattern = "DenopsReady",
+  	callback = function ()
+		dpp.make_state(dpp_base, dpp_config )
+	end
+  })
 end
 
-dofile(vim.g.base46_cache .. "defaults")
-vim.opt.rtp:prepend(lazypath)
-require "plugins"
+vim.api.nvim_create_autocmd("User", {
+	pattern = "Dpp:makeStatePost",
+	callback = function()
+		vim.notify("dpp make_state() is done")
+	end,
+})
+
+if vim.fn["dpp#min#load_state"](dpp_base) then
+	vim.opt.runtimepath:prepend(denops_src)
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "DenopsReady",
+		callback = function()
+			dpp.make_state(dpp_base, dpp_config)
+		end,
+	})
+end
+
+vim.api.nvim_create_user_command("DppInstall", "call dpp#async_ext_action('installer', 'install')", {})
+
