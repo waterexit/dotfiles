@@ -53,3 +53,6 @@ end
 
 vim.api.nvim_create_user_command("DppInstall", "call dpp#async_ext_action('installer', 'install')", {})
 
+-- keymap
+vim.keymap.set('i','jj','<ESC>')
+vim.keymap.set('','<TAB>','<CMD>tabn<CR>')
