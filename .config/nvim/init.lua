@@ -36,21 +36,11 @@ end
 vim.api.nvim_create_autocmd("User", {
 	pattern = "Dpp:makeStatePost",
 	callback = function()
+		dpp.load_state(dpp_base)
+		vim.fn["dpp#async_ext_action"]('installer', 'install')
 		vim.notify("dpp make_state() is done")
 	end,
 })
-
-if vim.fn["dpp#min#load_state"](dpp_base) then
-	vim.opt.runtimepath:prepend(denops_src)
-
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "DenopsReady",
-		callback = function()
-			dpp.make_state(dpp_base, dpp_config)
-		end,
-	})
-end
-
 vim.api.nvim_create_user_command("DppInstall", "call dpp#async_ext_action('installer', 'install')", {})
 
 -- keymap
