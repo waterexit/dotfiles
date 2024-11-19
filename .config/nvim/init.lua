@@ -1,7 +1,4 @@
 
-vim.cmd("filetype indent plugin on")
--- vim.cmd("syntax on")
-
 local runtime_root = vim.fn.stdpath("config") .. "/runtime/"
   local runtime_plugins = {"vim-denops/denops.vim", "Shougo/dpp.vim", "Shougo/dpp-ext-installer", "Shougo/dpp-protocol-git", "Shougo/dpp-ext-toml", "Shougo/dpp-ext-lazy", "Shougo/dpp-ext-local.git"}
   for _, plugin in ipairs(runtime_plugins) do
@@ -24,7 +21,7 @@ local dpp = require("dpp")
 
 local denops_src = runtime_root .. "vim-denops/denops.vim"
 if dpp.load_state(dpp_base) then
-  vim.opt.rtp:prepend(denops_src)
+vim.opt.rtp:prepend(denops_src)
   vim.api.nvim_create_autocmd("User", {
  	pattern = "DenopsReady",
   	callback = function ()
@@ -46,3 +43,9 @@ vim.api.nvim_create_user_command("DppInstall", "call dpp#async_ext_action('insta
 -- keymap
 vim.keymap.set('i','jj','<ESC>')
 vim.keymap.set('','<TAB>','<CMD>tabn<CR>')
+
+-- "filetype on" command execute at the end of init.lua because dpp.vim change runtimepath.
+-- if this line is at the firstline, filetype is empty.
+-- probably, the reason "filetype on" searches tree-sitter setting from rutimepath.
+vim.cmd("filetype indent plugin on")
+vim.cmd("syntax on")
