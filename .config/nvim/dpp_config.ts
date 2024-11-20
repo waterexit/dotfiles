@@ -32,28 +32,22 @@ export class Config extends BaseConfig {
         });
 
         const [context, options] = await args.contextBuilder.get(args.denops);
-        const dotfilesDir = "~/.config/nvim/";
-
-        // use toml
-        const tomls: Toml[] = [];
-        const toml = (await args.dpp.extAction(
+        const tomlfilesDir = "~/.config/nvim/toml/";
+	const tomlPaths = await Promise.all(["syntax", "lsp"].map(async (name) => await fn.expand(args.denops, tomlfilesDir + name + ".toml")));
+	const tomls: Toml[] =  await Promise.all(tomlPaths.map(async (path) => {
+	// use toml
+        return args.dpp.extAction(
             args.denops,
             context,
             options,
             "toml",
             "load",
             {
-                path: await fn.expand(args.denops, dotfilesDir + "/test.toml"),
+                path: path,
                 options: {
                     lazy: false,
                 },
-            }
-        )) as Toml | undefined;
-        if (toml) {
-            tomls.push(toml);
-        }
-
-
+            })}));
         const recordPlugins: Record<string, Plugin> = {};
         const ftplugins: Record<string, string> = {};
         const hooksFiles: string[] = [];
@@ -94,6 +88,8 @@ export class Config extends BaseConfig {
         return {
    //         ftplugins,
      //       hooksFiles,
+			//
+	    checkFiles: tomlPaths,
             plugins: lazyResult?.plugins ?? [],
             stateLines: lazyResult?.stateLines ?? [],
         };
