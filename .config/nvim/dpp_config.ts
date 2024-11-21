@@ -86,9 +86,7 @@ export class Config extends BaseConfig {
         )) as LazyMakeStateResult | undefined;
 
         return {
-   //         ftplugins,
-     //       hooksFiles,
-			//
+            ftplugins: ftplugins,
 	    checkFiles: tomlPaths,
             plugins: lazyResult?.plugins ?? [],
             stateLines: lazyResult?.stateLines ?? [],

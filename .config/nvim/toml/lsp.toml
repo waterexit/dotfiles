@@ -1,2 +1,16 @@
 [[plugins]]
-repo = "prabirshrestha/vim-lsp"
+repo="neovim/nvim-lsp"
+
+[[plugins]]
+repo="mfussenegger/nvim-jdtls"
+
+[plugins.ftplugin]
+# java="echo 'why?'"
+lua_java='''
+vim.notify("jdtls!")
+local config = {
+        cmd = {'${HOME}/dotfiles/lsp-installer/eclipse-jdt-ls'},
+	root_dir = vim.fs.dirname(vim.fs.find({'gradlew', 'mvnw'}, { upward = true })[1]),
+ }
+require('jdtls').start_or_attach(config)
+'''
