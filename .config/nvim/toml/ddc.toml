@@ -1,0 +1,25 @@
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+name = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/pum.vim'
+name = 'pum.vim'
+
+[[plugins]]
+repo = "Shougo/ddc-source-lsp"
+depends = 'ddc.vim'
+
+[[plugins]]
+repo = "Shougo/ddc-sorter_rank"
+depend = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+
+[[plugins]]
+repo = 'Shougo/ddc-filter-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+depends = ['ddc.vim','pum.vim']
