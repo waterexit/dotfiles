@@ -44,14 +44,15 @@ vim.api.nvim_create_autocmd("User",{
 		vim.notify("dpp make_state() is done")
 	end,
 })
+
 vim.api.nvim_create_user_command("DppInstall", "call dpp#async_ext_action('installer', 'install')", {})
 
---require'nvim-treesitter.configs'.setup {
---	indent = {enable = true},
---	highlight = {enable = true},
---	auto_install = true,
---	textobjects = {enable = true},
---}
+require'nvim-treesitter.configs'.setup {
+	indent = {enable = true},
+	highlight = {enable = true},
+	auto_install = true,
+	textobjects = {enable = true},
+}
 -- keymap
 vim.keymap.set('i','jj','<ESC>')
 vim.keymap.set('','<TAB>','<CMD>tabn<CR>')
@@ -63,3 +64,6 @@ vim.cmd("filetype indent plugin on")
 vim.cmd("syntax on")
 vim.cmd("set number")
 
+vim.g.mapleader = " "
+vim.keymap.set('n',"<Leader>gd", "<cmd>:lua vim.lsp.buf.definition()<CR>")
+vim.keymap.set('n',"<Leader>fm", vim.lsp.buf.format)
