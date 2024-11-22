@@ -70,16 +70,10 @@ vim.g.mapleader = " "
 vim.keymap.set('n', "<Leader>gd", "<cmd>:lua vim.lsp.buf.definition()<CR>")
 vim.keymap.set('n', "<Leader>fm", vim.lsp.buf.format)
 
-
-local capabilities = require("ddc_source_lsp").make_client_capabilities()
-
-require("lspconfig").denols.setup({ capabilities = capabilities,})
-
-
 vim.cmd([[ 
 call ddc#custom#patch_global('ui', 'pum')
 
-call ddc#custom#patch_global('sources', ['around','lsp'])
+call ddc#custom#patch_global('sources', ['lsp'])
 
 call ddc#custom#patch_global('sourceOptions', #{
       \ _: #{
@@ -103,9 +97,11 @@ call ddc#custom#patch_global('sourceParams', #{
 call ddc#enable()
 ]])
 
-vim.keymap.set('', '<C-n>',':lua vim.fn["pum#map#select_relative"](+1)')
-vim.keymap.set('', '<C-p>',':lua vim.fn["pum#map#select_relative"](-1)')
-vim.keymap.set('', '<C-y>',':lua vim.fn["pum#map#confirm"]()')
-vim.keymap.set('', '<C-e>',':lua vim.fn["pum#map#cancel"]()')
+vim.keymap.set({'n','v','i'}, '<C-n>', function() vim.fn["pum#map#select_relative"]('+1') end)
+vim.keymap.set({'n','v','i'}, '<C-p>', function() vim.fn["pum#map#select_relative"]('-1') end)
+vim.keymap.set({'n','v','i'}, '<C-y>', vim.fn["pum#map#confirm"])
+vim.keymap.set({'n','v','i'}, '<C-e>', vim.fn["pum#map#cancel"])
+vim.keymap.set({'n','v','i'}, '<C-l>', vim.fn["ddc#map#manual_complete"])
 
-require 'lspconfig'.lua_ls.setup({ cmd={'/home/water/dotfiles/lsp-installer/sumneko-lua-language-server'} })
+local capabilities = require("ddc_source_lsp").make_client_capabilities()
+require 'lspconfig'.lua_ls.setup({ cmd={'/home/water/dotfiles/lsp-installer/sumneko-lua-language-server'}, capabilities= capabilities})
