@@ -26,9 +26,8 @@ call ddc#custom#patch_global('sourceParams', #{
 call ddc#enable()
 ]])
 
-vim.keymap.set({'n','v','i'}, '<C-n>', function() vim.fn["pum#map#select_relative"]('1') end)
-vim.keymap.set({'n','v','i'}, '<C-p>', function() vim.fn["pum#map#select_relative"]('-1') end)
-vim.keymap.set({'n','v','i'}, '<C-y>', vim.fn["pum#map#confirm"])
-vim.keymap.set({'n','v','i'}, '<C-e>', vim.fn["pum#map#cancel"])
-vim.keymap.set({'n','v','i'}, '<C-l>', vim.fn["ddc#map#manual_complete"])
-
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-n>', function() vim.fn["pum#map#select_relative"]('1') end)
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-p>', function() vim.fn["pum#map#select_relative"]('-1') end)
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-y>', vim.fn["pum#map#confirm"])
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-e>', vim.fn["pum#map#cancel"])
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', vim.fn["ddc#map#manual_complete"])
