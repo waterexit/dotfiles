@@ -33,7 +33,7 @@ export class Config extends BaseConfig {
 
         const [context, options] = await args.contextBuilder.get(args.denops);
         const tomlfilesDir = "~/.config/nvim/toml/";
-	const tomlPaths = await Promise.all(["syntax", "lsp", "ddc"].map(async (name) => await fn.expand(args.denops, tomlfilesDir + name + ".toml")));
+	const tomlPaths = await Promise.all(["dpp", "syntax", "lsp", "ddc"].map(async (name) => await fn.expand(args.denops, tomlfilesDir + name + ".toml")));
 	const tomls: Toml[] =  await Promise.all(tomlPaths.map(async (path) => {
 	// use toml
         return args.dpp.extAction(
