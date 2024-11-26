@@ -21,5 +21,9 @@ repo = 'Shougo/ddc-source-around'
 repo = 'Shougo/ddc-filter-matcher_head'
 
 [[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
 repo = 'Shougo/ddc-ui-pum'
 depends = ['ddc.vim','pum.vim']
+
