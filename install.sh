@@ -21,3 +21,4 @@ EOS
 install starship 'curl -sS https://starship.rs/install.sh | sh'
 install fzf 'sudo apt install fzf'
 install deno 'curl -fsSL https://deno.land/install.sh | sh'
+sudo apt install ripgrep

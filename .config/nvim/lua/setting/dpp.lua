@@ -6,7 +6,7 @@ local runtime_plugins = { "vim-denops/denops.vim", "Shougo/dpp.vim", "Shougo/dpp
 
 for _, plugin in ipairs(runtime_plugins) do
 	if not (vim.uv or vim.loop).fs_stat(runtime_root .. plugin) then
-		vim.fn.system({
+            vim.fn.system({
 			"git",
 			"clone",
 			"https://github.com/" .. plugin .. ".git",
@@ -38,6 +38,7 @@ M.setup = function()
 			end
 		})
 	end
+
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "Dpp:makeStatePost",

@@ -1,0 +1,10 @@
+[[plugins]]
+repo= "tpope/vim-commentary"
+
+[[plugins]]
+repo= "nvim-lua/plenary.nvim"
+name = "plenary"
+
+[[plugins]]
+repo= "nvim-telescope/telescope.nvim"
+depends = "plenary"

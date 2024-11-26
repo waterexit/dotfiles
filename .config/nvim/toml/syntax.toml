@@ -1,5 +1,2 @@
 [[plugins]]
-repo= "tpope/vim-commentary"
-
-[[plugins]]
 repo = "nvim-treesitter/nvim-treesitter"
