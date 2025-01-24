@@ -13,12 +13,44 @@ if not first then
         textobjects = { enable = true },
     }
 
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
-    vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { desc = 'Telescope help tags' })
+
+    -- local dpp_base = vim.fn.stdpath("config") .. "/.cache/dpp/"
+    -- local runtime_root = dpp_base .. "repos/github.com/"
+    -- vim.opt.rtp:prepend(runtime_root .. "vim-denops/denops.vim")
+    require "expand-splash"
+    vim.api.nvim_create_autocmd("User", { pattern = "Pomodoro:finish", callback = function() vim.cmd('Splash') end })
+
+    require("telescope").setup {
+        extensions = {
+            file_browser = {
+                theme = 'ivy',
+                -- disables netrw and use telescope-file-browser in its place
+                hijack_netrw = true,
+                mappings = {
+                    ["i"] = {
+                        -- your custom insert mode mappings
+                    },
+                    ["n"] = {
+                        -- your custom normal mode mappings
+                    },
+                },
+            },
+        },
+    }
+    -- To get telescope-file-browser loaded and working with telescope,
+    -- you need to call load_extension, somewhere after setup function:
+    require("telescope").load_extension "file_browser"
+
+    require("notion").setup();
+
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "SetEnv",
+        callback = function()
+            local value = os.getenv("key")
+            vim.notify("a" .. value)
+        end
+    })
+    require "denops-dotenv".setup()
 else
     vim.notify("please restart")
 end

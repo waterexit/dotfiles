@@ -1,13 +1,22 @@
 [[plugins]]
-repo= "tpope/vim-commentary"
+repo = "tpope/vim-commentary"
 
 [[plugins]]
-repo= "nvim-lua/plenary.nvim"
+repo = "nvim-lua/plenary.nvim"
 name = "plenary"
 
 [[plugins]]
-repo= "nvim-telescope/telescope.nvim"
+repo = "nvim-telescope/telescope.nvim"
+name = "telescope"
 depends = "plenary"
 
 [[plugins]]
-repo= "vim-skk/skkeleton"
+repo = "nvim-telescope/telescope-file-browser.nvim"
+depends = "telescope"
+
+[[plugins]]
+repo = "vim-skk/skkeleton"
+
+[[plugins]]
+repo = "Al0den/notion.nvim"
+depends = "telescope"
