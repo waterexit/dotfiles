@@ -6,7 +6,6 @@ repo="mfussenegger/nvim-jdtls"
 
 [plugins.ftplugin]
 lua_java='''
-vim.notify("jdtls!")
 lsp_dir = '/'
 root_dir = vim.fs.root(0, {"gradlew", 'mvnw'})
 local config = {

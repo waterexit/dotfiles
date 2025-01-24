@@ -1,29 +1,9 @@
 local first = require 'setting/dpp'.setup()
 if not first then
-
     require 'setting/mapping'
     require 'setting/ddc'
+    require 'setting/lsp'
 
-    local capabilities = require("ddc_source_lsp").make_client_capabilities()
-    require 'lspconfig'.lua_ls.setup({ filetypes = { 'lua' }, cmd = { '/home/water/dotfiles/lsp-installer/sumneko-lua-language-server' }, capabilities = capabilities })
-    --require 'lspconfig'.denols.setup({  capabilities = capabilities })
-    require 'lspconfig'.ts_ls.setup {
-        init_options = {
-            plugins = {
-                {
-                    name = "@vue/typescript-plugin",
-                    location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                    languages = { "typescript", "javascript", "vue" },
-                },
-            },
-        },
-        filetypes = { "javascript",
-            "typescript",
-            "vue",
-        },
-        capabilities = capabilities
-    }
-    require 'lspconfig'.volar.setup { { filetypes = { "vue" } } }
     require 'setting/vim'
 
     require 'nvim-treesitter.configs'.setup {
