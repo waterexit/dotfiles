@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'Shougo/ddu.vim'
+
+[[pluins]]
+repo = 'Shougo/ddu.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu-ui-ff'
+
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_substring'
+
+[[plugins]]
+repo = 'Shougo/ddu-source-help'
