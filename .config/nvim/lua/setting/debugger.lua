@@ -18,6 +18,14 @@ require("dap").configurations.typescript = {
         cwd = "${workspaceFolder}",
     },
 }
+
+require("dapui").setup({})
+
+require 'dap'.listeners.before['event_initialized']['custom'] = function(session, body)
+    require 'dapui'.open()
+end
+
+
 vim.api.nvim_set_keymap('n', '<F5>', ':DapContinue<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<F10>', ':DapStepOver<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<F11>', ':DapStepInto<CR>', { silent = true })

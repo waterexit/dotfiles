@@ -1,3 +1,11 @@
 [[plugins]]
 repo = 'mfussenegger/nvim-dap'
+name = 'dap'
 
+[[plugins]]
+repo =  'nvim-neotest/nvim-nio'
+name = "nio"
+
+[[plugins]]
+repo = 'rcarriga/nvim-dap-ui'
+depends = ["dap", "nio"]
