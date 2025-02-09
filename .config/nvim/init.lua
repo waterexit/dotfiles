@@ -62,7 +62,6 @@ if not first then
     vim.api.nvim_create_autocmd("User", {
         pattern = "SetEnv",
         callback = function()
-            require("notion").setup();
         end
     })
 else

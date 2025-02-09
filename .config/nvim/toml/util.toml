@@ -16,7 +16,3 @@ depends = "telescope"
 
 [[plugins]]
 repo = "vim-skk/skkeleton"
-
-[[plugins]]
-repo = "Al0den/notion.nvim"
-depends = "telescope"
