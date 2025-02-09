@@ -21,4 +21,10 @@ EOS
 install starship 'curl -sS https://starship.rs/install.sh | sh'
 install fzf 'sudo apt install fzf'
 install deno 'curl -fsSL https://deno.land/install.sh | sh'
+sh <<EOS
+    wget https://github.com/microsoft/vscode-js-debug/releases/download/v1.96.0/js-debug-dap-v1.96.0.tar.gz &&
+    mkdir -p ~/.local/share/nvim/debug_server &&
+    tar -xzf js-debug-dap-v1.96.0.tar.gz -C ~/.local/share/nvim/debug_server &&
+    rm -rf js-debug-dap-v1.96.0.tar.gz
+EOS
 sudo apt install ripgrep

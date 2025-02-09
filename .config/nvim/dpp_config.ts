@@ -48,7 +48,7 @@ export class Config extends BaseConfig {
         const hooksFiles: string[] = [];
         const tomlfilesDir = "~/.config/nvim/toml/";
         const tomlPaths: string[] = await Promise.all(
-            ["dpp", "syntax", "lsp", "ddc", "util", "ddu"].map(async (
+            ["dpp", "syntax", "lsp", "ddc", "util", "ddu", "dap"].map(async (
                 name,
             ) => await fn.expand(
                 args.denops,

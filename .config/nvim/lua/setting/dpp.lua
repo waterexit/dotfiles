@@ -2,7 +2,7 @@ local dpp_base = vim.fn.stdpath("config") .. "/.cache/dpp/"
 
 -- same dpp using dir via git protocol
 local runtime_root = dpp_base .. "repos/github.com/"
-local runtime_plugins = { "vim-denops/denops.vim", "Shougo/dpp.vim", "Shougo/dpp-ext-installer", "Shougo/dpp-protocol-git", "Shougo/dpp-ext-toml", "Shougo/dpp-ext-local" , "Shougo/dpp-ext-lazy" }
+local runtime_plugins = { "vim-denops/denops.vim", "Shougo/dpp.vim", "Shougo/dpp-ext-installer", "Shougo/dpp-protocol-git", "Shougo/dpp-ext-toml", "Shougo/dpp-ext-local", "Shougo/dpp-ext-lazy" }
 
 for _, plugin in ipairs(runtime_plugins) do
     if not (vim.uv or vim.loop).fs_stat(runtime_root .. plugin) then
