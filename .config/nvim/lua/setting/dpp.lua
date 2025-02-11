@@ -18,6 +18,7 @@ end
 
 local dpp = require("dpp")
 
+vim.g['denops#server#deno_args'] = vim.list_extend(vim.g['denops#server#deno_args'], { '--inspect' })
 M = {}
 
 M.setup = function()

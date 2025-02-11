@@ -15,6 +15,20 @@ require("dap").configurations.typescript = {
         request = "launch",
         name = "Launch file",
         program = "${file}",
+        runtimeExecutable = "deno",
+        runtimeArgs = {
+            "run",
+            "--inspect-wait",
+            "--allow-all"
+        },
+        attachSimplePort = 9229,
+        cwd = "${workspaceFolder}",
+    },
+    {
+        type = "pwa-node",
+        request = "attach",
+        name = "Attach",
+        processId = require("dap.utils").pick_process,
         cwd = "${workspaceFolder}",
     },
 }
@@ -23,6 +37,10 @@ require("dapui").setup({})
 
 require 'dap'.listeners.before['event_initialized']['custom'] = function(session, body)
     require 'dapui'.open()
+end
+
+require 'dap'.listeners.before['event_terminated']['custom'] = function(session, body)
+    require 'dapui'.close()
 end
 
 
