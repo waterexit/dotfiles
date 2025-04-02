@@ -6,6 +6,7 @@ if not first then
     require 'setting/lsp'
 
     require 'setting/vim'
+    require 'setting/syntax'
     require 'setting/debugger'
 
     require 'nvim-treesitter.configs'.setup {
