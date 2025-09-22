@@ -1,7 +1,6 @@
 local capabilities = require("ddc_source_lsp").make_client_capabilities()
 --lua
-require 'lspconfig'.
-    lua_ls.setup({
+vim.lsp.config('lua_ls', {
         settings = {
             Lua = {
                 workspace = {
@@ -16,11 +15,12 @@ require 'lspconfig'.
         cmd = { '/home/water/dotfiles/lsp-installer/sumneko-lua-language-server' },
         capabilities = capabilities })
 
+vim.lsp.enable('lua_ls')
 --typescript
 local is_node_dir = function()
     return require 'lspconfig'.util.root_pattern('package.json')(vim.fn.getcwd())
 end
-require 'lspconfig'.ts_ls.setup {
+vim.lsp.config('ts_ls', {
     init_options = {
         plugins = {
             {
@@ -33,6 +33,7 @@ require 'lspconfig'.ts_ls.setup {
     filetypes = {
         "javascript",
         "typescript",
+        "javascriptreact",
         "vue",
     },
     capabilities = capabilities,
@@ -43,10 +44,13 @@ require 'lspconfig'.ts_ls.setup {
             vim.notify("ts_ls is selected")
         end
     end
-}
-require 'lspconfig'.volar.setup { { filetypes = { "vue" } } }
+})
+vim.lsp.enable('ts_ls')
 
-require 'lspconfig'.denols.setup {
+vim.lsp.config('vue_ls' , { {filetype = {"vue"}} })
+vim.lsp.enable('vue_ls')
+
+vim.lsp.config('denols', {
     on_attach = function(client)
         if is_node_dir() then
             client.stop(true)
@@ -55,4 +59,12 @@ require 'lspconfig'.denols.setup {
         end
     end,
     capabilities = capabilities
-}
+})
+
+--keymap
+vim.keymap.set('n', "<Leader>gd", vim.lsp.buf.definition)
+vim.keymap.set('n', "<Leader>fm", vim.lsp.buf.format)
+vim.keymap.set('n', "<Leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set('n', "<Leader>ra", vim.lsp.buf.rename)
+vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, {})
+
